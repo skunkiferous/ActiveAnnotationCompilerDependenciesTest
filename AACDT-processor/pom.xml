@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+        <groupId>com.blockwithme</groupId>
+        <artifactId>AACDT-processor</artifactId>
+        <version>0.1.0</version>
+    <name>AACDT-processor</name>
+    <packaging>jar</packaging>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+	<build>
+		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+		<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${project.basedir}/src/main/xtend-gen</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+						<fileset>
+							<directory>${project.basedir}/src/test/xtend-gen</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+		                <configuration>
+                		    <includePom>true</includePom>
+		                </configuration>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+				<version>2.6.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>testCompile</goal>
+							<goal>xtend-install-debug-info</goal>
+							<goal>xtend-test-install-debug-info</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.basedir}/src/main/xtend-gen</outputDirectory>
+							<testOutputDirectory>${project.basedir}/src/test/xtend-gen</testOutputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+    <dependencies>
+	<dependency>
+		<groupId>org.eclipse.xtend</groupId>
+		<artifactId>org.eclipse.xtend.lib</artifactId>
+		<version>2.6.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.xtend</groupId>
+		<artifactId>org.eclipse.xtend.core</artifactId>
+		<version>2.6.1</version>
+	</dependency>
+    </dependencies>
+</project>
